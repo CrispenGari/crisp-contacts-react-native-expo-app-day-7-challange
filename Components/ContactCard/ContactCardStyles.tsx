@@ -35,7 +35,13 @@ const styles = StyleSheet.create({
     }
     , contactcard__text3:{
         color: "green",
-
+    },
+    contactcard__selected:{
+        backgroundColor: "green",
+        flexDirection: "row",
+        paddingHorizontal:10,
+        paddingVertical: 5,
+        color: "white"
     }
 })
 export default styles

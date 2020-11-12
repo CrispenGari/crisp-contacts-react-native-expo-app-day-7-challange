@@ -4,7 +4,6 @@ import {View, Text, TextInput, Button, TouchableOpacity} from 'react-native'
 import {Avatar} from 'react-native-paper'
 import styles from './EditContactStyles'
 const EditContact = ({selectedContact}) => {
-    const [value, onChangeText] = useState("");
     const [name, setName] = useState("");
     const [firstname, setFirstName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");

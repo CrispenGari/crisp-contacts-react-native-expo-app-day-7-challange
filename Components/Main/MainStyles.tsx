@@ -56,6 +56,23 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
         textTransform: "uppercase",
         color:"lightseagreen"
-    }
+    },
+    main__menu:{
+        padding: 10,
+        position: "relative",
+        width: Dimensions.get("screen").width,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        zIndex: 10,
+        backgroundColor: "white"
+    },
+    main__menu__button:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: 60,
+        alignItems: "center"
+    }, main__text4:{
+        color: "gray"
+    },
 })
 export default styles

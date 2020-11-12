@@ -1,4 +1,4 @@
-import * as Contacts from 'expo-contacts';
+import * as Contacts from "expo-contacts";
 import {Alert, BackHandler} from 'react-native'
 const btnAction = () => {
   Alert.alert(
@@ -20,6 +20,25 @@ const btnAction = () => {
   );
   return true;
 };
+const confirmAction = (deleteHandler, selectedContact) => {
+  Alert.alert(
+    "Crisp Contacts",
+    `Are you sure you want to delete ${selectedContact?.name} forever?`,
+    [{
+        text: "cancel",
+        onPress: () => null,
+        style: "cancel",
+      }, {
+        text: "yes",
+        onPress: () => deleteHandler(),
+        style: "destructive",
+      },
+    ],{
+      cancelable: !true
+    }
+  );
+  return true;
+};
 const getContactListAsync = async()=>{
   if(await Contacts.isAvailableAsync()){
     const permision =await Contacts.getPermissionsAsync()
@@ -28,7 +47,7 @@ const getContactListAsync = async()=>{
       console.log(request_permition)
     }else{
         const contacts = await Contacts.getContactsAsync({
-          sortType :Contacts.SortTypes.FirstName,
+          sort:Contacts.SortTypes.FirstName,
           fields: [Contacts.EMAILS, Contacts.PHONE_NUMBERS, Contacts.PHONETIC_FIRST_NAME, Contacts.PHONETIC_LAST_NAME, Contacts.PHONETIC_MIDDLE_NAME, Contacts.BIRTHDAY, Contacts.ADDRESSES, Contacts.DATES, Contacts.IMAGE, Contacts.IM_ADDRESSES,Contacts.RAW_IMAGE]
         })
         return {CONTACTS_LIST: contacts}
@@ -38,13 +57,14 @@ const getContactListAsync = async()=>{
 const addToContactsAsync =async (value)=>{
     if(Object.keys(value).length !==0){
       console.log(value)
-      return await Contacts.addContactAsync({
-        [Contacts.Fields.FirstName]: value?.FIRST_NAME,
-        [Contacts.Fields.Name]: value?.NAME,
-        [Contacts.Fields.PhoneNumbers]: [{
-          number : value?.PHONE_NUMBER
-        }],
-      })
+    //  await Contacts.addContactAsync({})
+
     }
 }
-export {btnAction, getContactListAsync, addToContactsAsync} 
+const updateContactAsync = async (value)=>{
+  return
+}
+const deleteContactAsync = async (value)=>{
+    return await Contacts.removeContactAsync(value.CONTACT_ID)
+}
+export {btnAction,confirmAction, getContactListAsync, addToContactsAsync, updateContactAsync, deleteContactAsync} 
